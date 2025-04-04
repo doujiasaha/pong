@@ -1,5 +1,8 @@
 from turtle import Turtle
 import random
+import time
+
+GAMESPEED = 0.016
 
 class Ball(Turtle):
     
@@ -12,6 +15,7 @@ class Ball(Turtle):
         self.speed("fastest")
         self.goto(0,0)
         self.rand_pos()
+        self.gamespeed = GAMESPEED
 
     # Set Coordinate to either bottom-left, bottom-right, top-left or top-right from 0,0
     def move(self):
@@ -30,9 +34,11 @@ class Ball(Turtle):
     #when paddle is hit, reverse X-axis
     def paddle_bounce(self):
         self.x_move *= -1
+        self.gamespeed *= 0.8
 
 
     #reset to 0,0
     def reset(self):
         self.goto(0, 0)
+        self.gamespeed = 0.016
         self.rand_pos()

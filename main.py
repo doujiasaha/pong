@@ -58,22 +58,26 @@ screen.onkey(player.opponent_down, "Down")
 game_is_on = True
 while game_is_on:
     screen.update()
-    time.sleep(0.016)
+    time.sleep(ball.gamespeed)
     ball.move()
+    print(ball.gamespeed)
 
+    #Wall collision
     if ball.ycor() > TOP_WALL or ball.ycor() < BOTTOM_WALL:
         play_sound()
         ball.wall_bounce()
-        
+    
+    #Paddle collision
     if -580 < ball.xcor() < -540 and ball.distance(player.player) < 30:
         play_sound()
         ball.paddle_bounce()
-            
+    
     if 520 < ball.xcor() < 560 and ball.distance(player.opponent) < 30:
         play_sound()
         ball.paddle_bounce()
 
-# Ball missed by left player
+
+    # Ball missed by left player
     if ball.xcor() < RIGHT_WALL:
         scoreboard.opponent_scores()
         scoreboard.score_up()
